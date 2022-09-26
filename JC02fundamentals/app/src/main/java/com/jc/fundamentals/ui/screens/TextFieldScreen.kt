@@ -35,15 +35,28 @@
 package com.jc.fundamentals.ui.screens
 
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import com.jc.fundamentals.R
 import com.jc.fundamentals.ui.router.BackButtonHandler
 import com.jc.fundamentals.ui.router.JetFundamentalsRouter
 import com.jc.fundamentals.ui.router.Screen
+import kotlin.coroutines.coroutineContext
 
 @Composable
 fun TextFieldScreen() {
@@ -62,5 +75,24 @@ fun TextFieldScreen() {
 
 @Composable
 fun MyTextField() {
-  //TODO add your code here
+    val text = remember {
+        mutableStateOf("")
+    }
+    val context = LocalContext.current
+  TextField(
+      value = text.value,
+      onValueChange = { text.value = it },
+      label = { Text(text = stringResource(id = R.string.app_name))})
+
+    OutlinedTextField(
+        value = text.value,
+        onValueChange = {text.value = it},
+        label = { Text(text = stringResource(id = R.string.email))},
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = colorResource(id = R.color.colorPrimary),
+            focusedLabelColor = colorResource(id = R.color.colorAccent),
+            cursorColor = colorResource(id = R.color.purple_200)),
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = {Toast.makeText(context,text.value,Toast.LENGTH_SHORT).show()})
+    )
 }

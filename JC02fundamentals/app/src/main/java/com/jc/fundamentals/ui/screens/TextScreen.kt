@@ -34,12 +34,20 @@
 
 package com.jc.fundamentals.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
+import com.jc.fundamentals.R
 import com.jc.fundamentals.ui.router.BackButtonHandler
 import com.jc.fundamentals.ui.router.JetFundamentalsRouter
 import com.jc.fundamentals.ui.router.Screen
@@ -47,7 +55,9 @@ import com.jc.fundamentals.ui.router.Screen
 @Composable
 fun TextScreen() {
   Column(
-      modifier = Modifier.fillMaxSize(),
+      modifier = Modifier
+          .fillMaxSize()
+          .background(Color.Cyan),
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
   ) {
@@ -61,5 +71,18 @@ fun TextScreen() {
 
 @Composable
 fun MyText() {
-  //TODO add your code here
+  
+    Text(text = stringResource(id = R.string.hello),
+         fontFamily = FontFamily.Cursive,
+         fontSize = 40.sp,
+         color = Color.Blue,
+         fontWeight = FontWeight.Light
+    )
+    Text(text = "World")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewText() {
+    TextScreen()
 }
